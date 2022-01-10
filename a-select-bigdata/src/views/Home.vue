@@ -28,7 +28,6 @@
           v-for="item in item.letter_arr"
           :key="item"
           :value="item"
-          @click="handleClickChange(item)"
           >{{ item }}</a-select-option
         >
       </a-select-opt-group>
@@ -39,6 +38,15 @@
 <script>
 import { reactive, toRefs } from "vue";
 import debounce from "lodash/debounce";
+/**
+ * all_Data: 总数据
+ * showList：用来展示在 select 下拉框中的数据
+ * handlePopupScroll：select 下拉框中的滚动条 滚动时 的回调，做防抖处理
+ * handleDropdownVisibleChange：select 下拉框 展开时 的回调监听，open===true，即展开下拉框
+ * loadMoreData：滚动条滚动时，showList加载 all_Data 中的数据，更新下拉框的数据
+ * handleChange：获取 点击选中的 数据
+ * 
+*/
 export default {
   name: "Home",
   setup() {
@@ -160,14 +168,8 @@ export default {
       console.log("数据筛选", item);
     };
 
-    // 监听 - 点击 选中 的值
-    const handleClickChange = (item) => {
-      console.log("点击了--", item);
-    };
-
     return {
       ...toRefs(home_reac),
-      handleClickChange,
       handlePopupScroll,
       handleChange,
       handleDropdownVisibleChange,
