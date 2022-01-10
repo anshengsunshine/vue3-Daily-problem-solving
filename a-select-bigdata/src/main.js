@@ -4,6 +4,6 @@ import router from "./router";
 import store from "./store";
 import { Select } from "ant-design-vue";
 
-const app = create(App)
+const app = createApp(App)
 
 app.use(store).use(router).use(Select).mount("#app");
